@@ -2,7 +2,7 @@ homepage: "https://github.com/episodicza/ssgtm_filter_querystring"
 documentation: "https://github.com/episodicza/ssgtm_filter_querystring#readme"
 versions:
   - sha: 6ec15930b616c4a1fa95b24aae282baf2a40e83b
-    changeNotes: Added falsy URL to parse verification.
+    changeNotes: Added falsy URL verification.
   - sha: 483abac46eb79933d7b9c14210678ef24615992b
     changeNotes: Initial release.
     
