@@ -1,6 +1,8 @@
 homepage: "https://github.com/episodicza/ssgtm_filter_querystring"
 documentation: "https://github.com/episodicza/ssgtm_filter_querystring#readme"
 versions:
+  - sha: 50b3a4574177c884ce3489d8ecf0ee4d4c933e04
+    changeNotes: Fixed to handle empty input URL Source variable
   - sha: 483abac46eb79933d7b9c14210678ef24615992b
     changeNotes: Initial release.
     
