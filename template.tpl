@@ -116,9 +116,7 @@ const decodeUriComponent = require('decodeUriComponent');
 const log = require('logToConsole');
 
 const url = data.urlSource === 'event_page_location' ? getEventData('page_location') : data.urlSource;
-const parsedUrl = parseUrl(URL);
-
-if (!parsedUrl) return;
+const parsedUrl = parseUrl(url);
 
 if (!parsedUrl.search) return url;
 
