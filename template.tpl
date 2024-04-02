@@ -1,4 +1,4 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
@@ -15,7 +15,10 @@ ___INFO___
   "securityGroups": [],
   "displayName": "Filter Query String Parameters",
   "description": "Whitelist or Blacklist query parameters in a URL by key. Can be used to remove PII, tracking or redundant data from URLs before passing on to other services like GA4 or Meta.",
-  "categories": ["UTILITY", "ATTRIBUTION"],
+  "categories": [
+    "UTILITY",
+    "ATTRIBUTION"
+  ],
   "containerContexts": [
     "SERVER"
   ]
@@ -118,6 +121,7 @@ const log = require('logToConsole');
 const url = data.urlSource === 'event_page_location' ? getEventData('page_location') : data.urlSource;
 const parsedUrl = parseUrl(url);
 
+if (!parsedUrl) return url;
 if (!parsedUrl.search) return url;
 
 // We loop through this often so pre-transform filter keys for case sensitivity
@@ -223,6 +227,31 @@ scenarios:
     let variableResult = runCode(mockData);
 
     assertThat(variableResult).isEqualTo("https://www.example.com:8080/path1/Path2.ext#target");
+- name: Empty urlSource
+  code: |
+    let mockData = {
+      urlSource: "",
+      filterType: "blacklist",
+      filterParams: []
+    };
+    let variableResult = runCode(mockData);
+    assertThat(variableResult).isEqualTo("");
+
+    mockData = {
+      urlSource: null,
+      filterType: "blacklist",
+      filterParams: []
+    };
+    variableResult = runCode(mockData);
+    assertThat(variableResult).isEqualTo(null);
+
+    mockData = {
+      urlSource: undefined,
+      filterType: "blacklist",
+      filterParams: []
+    };
+    variableResult = runCode(mockData);
+    assertThat(variableResult).isEqualTo(undefined);
 - name: Blacklist case insensitive match
   code: |
     var mockData = {
@@ -328,7 +357,7 @@ scenarios:
     let variableResult = runCode(mockData);
     assertThat(variableResult).isEqualTo("https://www.example.com:8080/?K3=v3");
 - name: Blacklist array keys
-  code: |
+  code: |-
     var mockData = {
       urlSource: "https://www.example.com:8080?k1=v1&k1=v2&k3=v3",
       filterType: "blacklist",
