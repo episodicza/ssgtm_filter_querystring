@@ -121,7 +121,7 @@ const log = require('logToConsole');
 const url = data.urlSource === 'event_page_location' ? getEventData('page_location') : data.urlSource;
 const parsedUrl = parseUrl(url);
 
-if (!parsedUrl) return url;
+if (!parsedUrl) return;
 if (!parsedUrl.search) return url;
 
 // We loop through this often so pre-transform filter keys for case sensitivity
@@ -227,7 +227,7 @@ scenarios:
     let variableResult = runCode(mockData);
 
     assertThat(variableResult).isEqualTo("https://www.example.com:8080/path1/Path2.ext#target");
-- name: Empty urlSource
+- name: Weird urlSource
   code: |
     let mockData = {
       urlSource: "",
@@ -235,7 +235,7 @@ scenarios:
       filterParams: []
     };
     let variableResult = runCode(mockData);
-    assertThat(variableResult).isEqualTo("");
+    assertThat(variableResult).isEqualTo(undefined);
 
     mockData = {
       urlSource: null,
@@ -243,7 +243,7 @@ scenarios:
       filterParams: []
     };
     variableResult = runCode(mockData);
-    assertThat(variableResult).isEqualTo(null);
+    assertThat(variableResult).isEqualTo(undefined);
 
     mockData = {
       urlSource: undefined,
