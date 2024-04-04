@@ -19,6 +19,8 @@ The tests are reasonably complete and you can see the basics of how it operates 
 ### Choose a URL source
 The default is to use the eventData.page_location however you can change this to any variable you choose.
 
+If, however, you choose a variable that cannot be parsed as a URL then the template will return `undefined`.
+
 ### Choose a filter type
 - A _whitelist_ will keep only the query parameters that you specify and remove all the rest from the final URL.
 - A _blacklist_ will remove all the query parameters that you specify and keep the rest in the final URL.
